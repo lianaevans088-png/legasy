@@ -3,108 +3,105 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Голос Рода — семейная капсула памяти с AI-биографом</title>
-  <meta name="description" content="AI-биограф, который помогает сохранить голос, истории, письма, фотографии и семейные ценности для будущих поколений." />
+  <title>LastCall AI — позвоните тем, чей голос хочется услышать снова</title>
+  <meta name="description" content="LastCall AI — видеозвонок с AI-аватаром покойного родственника на основе фото, видео, голоса, писем и семейных воспоминаний." />
 
-  <meta property="og:title" content="Голос Рода — семейная капсула памяти с AI-биографом" />
-  <meta property="og:description" content="Запишите истории, которые ваша семья не должна потерять. ИИ превратит их в цифровую биографию, голосовой архив и капсулу времени." />
+  <meta property="og:title" content="LastCall AI — звонок покойному родственнику через AI-видеоаватар" />
+  <meta property="og:description" content="Загрузите семейные фото, видео, голосовые записи и письма. ИИ создаст бережный видеоаватар для разговора с памятью близкого человека." />
   <meta property="og:type" content="website" />
 
   <style>
     :root {
-      --bg: #090A0D;
-      --bg-soft: #111319;
-      --bg-card: rgba(255, 255, 255, 0.065);
-      --bg-card-strong: rgba(255, 255, 255, 0.095);
-      --text: #F6F0E8;
-      --muted: #B8B1A7;
-      --muted-2: #81796E;
-      --line: rgba(255, 255, 255, 0.13);
-      --gold: #D6B06D;
-      --gold-2: #F0D9A3;
-      --amber: #B8803F;
-      --deep: #17110B;
-      --green: #9AB89D;
-      --danger: #D9A38C;
-      --shadow: 0 30px 90px rgba(0,0,0,.45);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 16px;
+      --bg: #06070B;
+      --bg2: #0C0E14;
+      --card: rgba(255,255,255,.07);
+      --card2: rgba(255,255,255,.105);
+      --text: #F8F4ED;
+      --muted: #B9B1A6;
+      --muted2: #7D766D;
+      --line: rgba(255,255,255,.13);
+      --line2: rgba(255,255,255,.20);
+      --gold: #E3BC72;
+      --gold2: #F5DFAB;
+      --violet: #A590FF;
+      --blue: #8AC7FF;
+      --red: #E99D8F;
+      --green: #9DC9A3;
+      --darkgold: #5B3E16;
+      --shadow: 0 28px 90px rgba(0,0,0,.52);
       --max: 1180px;
+      --r-xl: 36px;
+      --r-lg: 26px;
+      --r-md: 18px;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(circle at 12% 8%, rgba(214,176,109,.22), transparent 34%),
-        radial-gradient(circle at 84% 12%, rgba(154,184,157,.13), transparent 32%),
-        radial-gradient(circle at 50% 70%, rgba(184,128,63,.12), transparent 42%),
-        var(--bg);
       color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(227,188,114,.22), transparent 34%),
+        radial-gradient(circle at 88% 15%, rgba(165,144,255,.18), transparent 31%),
+        radial-gradient(circle at 50% 85%, rgba(138,199,255,.11), transparent 42%),
+        linear-gradient(180deg, #06070B 0%, #090A10 46%, #050509 100%);
       overflow-x: hidden;
     }
 
     a { color: inherit; text-decoration: none; }
 
-    .noise {
+    .grain {
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .06;
+      opacity: .055;
       z-index: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 260 260' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     .page { position: relative; z-index: 1; }
-
-    .container {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-    }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
     .nav {
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(18px);
-      background: rgba(9,10,13,.68);
+      background: rgba(6,7,11,.70);
       border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(18px);
     }
 
     .nav-inner {
-      height: 74px;
+      height: 72px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 22px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      letter-spacing: -.03em;
-      font-weight: 760;
+      font-weight: 820;
+      letter-spacing: -.035em;
       font-size: 18px;
     }
 
     .brand-mark {
-      width: 38px;
-      height: 38px;
-      border-radius: 14px;
+      width: 40px;
+      height: 40px;
+      border-radius: 15px;
       background:
-        radial-gradient(circle at 35% 28%, #fff3c8, transparent 24%),
-        linear-gradient(135deg, var(--gold), #815623 75%);
-      box-shadow: 0 12px 30px rgba(214,176,109,.25);
+        radial-gradient(circle at 33% 28%, #fff6d3, transparent 23%),
+        linear-gradient(135deg, var(--gold2), #b4742a 60%, #39200a);
+      color: #1d1307;
       display: grid;
       place-items: center;
-      color: #221608;
-      font-weight: 900;
+      font-weight: 950;
+      box-shadow: 0 14px 35px rgba(227,188,114,.24);
     }
 
     .nav-links {
@@ -114,38 +111,34 @@
       color: var(--muted);
       font-size: 14px;
     }
-
     .nav-links a:hover { color: var(--text); }
 
     .nav-cta {
-      padding: 11px 16px;
+      padding: 10px 15px;
       border-radius: 999px;
-      background: rgba(214,176,109,.12);
-      border: 1px solid rgba(214,176,109,.35);
-      color: var(--gold-2);
+      background: rgba(227,188,114,.11);
+      border: 1px solid rgba(227,188,114,.32);
+      color: var(--gold2);
     }
 
-    .hero {
-      padding: 82px 0 70px;
-      position: relative;
-    }
+    .hero { padding: 78px 0 64px; }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.02fr .98fr;
+      grid-template-columns: .98fr 1.02fr;
       gap: 44px;
       align-items: center;
     }
 
-    .eyebrow {
+    .badge {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 9px 13px;
-      border: 1px solid rgba(214,176,109,.28);
-      background: rgba(214,176,109,.08);
-      color: var(--gold-2);
       border-radius: 999px;
+      border: 1px solid rgba(227,188,114,.30);
+      background: rgba(227,188,114,.08);
+      color: var(--gold2);
       font-size: 13px;
       margin-bottom: 22px;
     }
@@ -154,820 +147,578 @@
       width: 8px;
       height: 8px;
       border-radius: 999px;
-      background: var(--gold);
-      box-shadow: 0 0 0 8px rgba(214,176,109,.12);
+      background: var(--green);
+      box-shadow: 0 0 0 8px rgba(157,201,163,.13);
     }
 
     h1 {
-      font-size: clamp(44px, 6vw, 84px);
-      line-height: .95;
-      letter-spacing: -.075em;
       margin: 0 0 24px;
-      max-width: 760px;
+      font-size: clamp(43px, 6.5vw, 86px);
+      line-height: .93;
+      letter-spacing: -.08em;
+      max-width: 800px;
     }
 
-    .gradient-text {
-      background: linear-gradient(120deg, #fff8e9, #d6b06d 55%, #9ab89d);
+    .soft-gradient {
+      background: linear-gradient(120deg, #fff7e5, #e3bc72 48%, #a590ff 92%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
     .lead {
+      max-width: 720px;
+      margin: 0 0 31px;
       color: var(--muted);
       font-size: clamp(18px, 2vw, 22px);
       line-height: 1.55;
-      margin: 0 0 32px;
-      max-width: 690px;
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 28px;
-    }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-bottom: 26px; }
 
     .btn {
+      min-height: 53px;
+      padding: 0 22px;
+      border-radius: 999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      min-height: 52px;
-      padding: 0 22px;
-      border-radius: 999px;
-      font-weight: 720;
+      gap: 9px;
+      font-weight: 780;
       letter-spacing: -.02em;
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
       cursor: pointer;
+      border: 0;
+      font-size: 15px;
     }
-
     .btn:hover { transform: translateY(-2px); }
 
     .btn-primary {
-      background: linear-gradient(135deg, #f2d89b, #c9974e 55%, #8a5b26);
-      color: #1d1409;
-      box-shadow: 0 18px 45px rgba(214,176,109,.25);
+      color: #211504;
+      background: linear-gradient(135deg, #fff1bf, #e3bc72 45%, #9a6424);
+      box-shadow: 0 18px 48px rgba(227,188,114,.24);
     }
-
     .btn-secondary {
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.045);
       color: var(--text);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
     }
 
-    .microcopy {
-      color: var(--muted-2);
+    .note {
+      color: var(--muted2);
       font-size: 13px;
-      line-height: 1.5;
+      line-height: 1.55;
+      max-width: 720px;
     }
 
-    .hero-card {
+    .hero-visual {
+      min-height: 650px;
       position: relative;
-      min-height: 620px;
-      border-radius: 42px;
+      border-radius: 44px;
       border: 1px solid rgba(255,255,255,.14);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04)),
-        radial-gradient(circle at 30% 20%, rgba(214,176,109,.25), transparent 30%),
-        rgba(255,255,255,.035);
+        radial-gradient(circle at 24% 18%, rgba(227,188,114,.20), transparent 33%),
+        radial-gradient(circle at 76% 8%, rgba(165,144,255,.16), transparent 32%),
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
       box-shadow: var(--shadow);
       overflow: hidden;
-      padding: 28px;
     }
 
-    .orb {
+    .call-window {
       position: absolute;
-      width: 280px;
-      height: 280px;
-      border-radius: 999px;
-      background: radial-gradient(circle, rgba(240,217,163,.75), rgba(214,176,109,.18) 48%, transparent 70%);
-      filter: blur(8px);
-      top: 80px;
-      right: 48px;
-      opacity: .75;
-    }
-
-    .memory-device {
-      position: absolute;
-      inset: 112px 42px auto;
-      min-height: 390px;
-      border-radius: 34px;
-      border: 1px solid rgba(255,255,255,.16);
+      inset: 34px;
+      border-radius: 36px;
+      border: 1px solid rgba(255,255,255,.18);
       background:
-        linear-gradient(160deg, rgba(9,10,13,.82), rgba(30,25,18,.7)),
-        rgba(255,255,255,.04);
-      box-shadow: 0 30px 80px rgba(0,0,0,.46);
-      padding: 26px;
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.28)),
+        radial-gradient(circle at 50% 34%, rgba(227,188,114,.24), transparent 30%),
+        #0B0D13;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    }
+
+    .call-top {
+      height: 74px;
+      padding: 0 22px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(0,0,0,.18);
+    }
+
+    .call-person { display: flex; align-items: center; gap: 12px; }
+    .avatar-dot {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background:
+        linear-gradient(135deg, #f3dba1, #7f5120),
+        var(--gold);
+      display: grid;
+      place-items: center;
+      color: #1f1408;
+      font-weight: 900;
+    }
+    .call-person strong { display: block; font-size: 15px; }
+    .call-person span { display: block; color: var(--muted2); font-size: 12px; margin-top: 3px; }
+    .call-status {
+      color: var(--green);
+      font-size: 12px;
+      border: 1px solid rgba(157,201,163,.28);
+      background: rgba(157,201,163,.10);
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+
+    .video-face {
+      height: 370px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(245,223,171,.20), transparent 24%),
+        radial-gradient(circle at 50% 47%, rgba(165,144,255,.13), transparent 42%);
+    }
+
+    .face {
+      width: min(270px, 58vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      position: relative;
+      background:
+        radial-gradient(circle at 50% 38%, rgba(255,246,218,.95), rgba(227,188,114,.40) 32%, rgba(62,42,20,.28) 54%, rgba(255,255,255,.04) 70%),
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+      border: 1px solid rgba(245,223,171,.26);
+      box-shadow:
+        0 0 80px rgba(227,188,114,.18),
+        inset 0 0 55px rgba(255,255,255,.11);
       overflow: hidden;
     }
 
-    .device-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 26px;
-    }
-
-    .dots { display: flex; gap: 8px; }
-    .dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.22);
-    }
-
-    .device-badge {
-      font-size: 12px;
-      color: var(--gold-2);
-      border: 1px solid rgba(214,176,109,.28);
-      border-radius: 999px;
-      padding: 6px 10px;
-      background: rgba(214,176,109,.08);
-    }
-
-    .wave {
-      height: 88px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin: 24px 0;
-    }
-
-    .wave span {
-      width: 8px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, #fff2ca, #d6b06d);
-      opacity: .92;
-      animation: wave 1.6s ease-in-out infinite;
-    }
-
-    .wave span:nth-child(1) { height: 22px; animation-delay: .0s; }
-    .wave span:nth-child(2) { height: 46px; animation-delay: .08s; }
-    .wave span:nth-child(3) { height: 70px; animation-delay: .16s; }
-    .wave span:nth-child(4) { height: 38px; animation-delay: .24s; }
-    .wave span:nth-child(5) { height: 84px; animation-delay: .32s; }
-    .wave span:nth-child(6) { height: 54px; animation-delay: .40s; }
-    .wave span:nth-child(7) { height: 28px; animation-delay: .48s; }
-    .wave span:nth-child(8) { height: 66px; animation-delay: .56s; }
-    .wave span:nth-child(9) { height: 42px; animation-delay: .64s; }
-    .wave span:nth-child(10) { height: 76px; animation-delay: .72s; }
-    .wave span:nth-child(11) { height: 34px; animation-delay: .80s; }
-    .wave span:nth-child(12) { height: 58px; animation-delay: .88s; }
-
-    @keyframes wave {
-      0%, 100% { transform: scaleY(.62); opacity: .55; }
-      50% { transform: scaleY(1.05); opacity: 1; }
-    }
-
-    .device-title {
-      font-size: 29px;
-      line-height: 1.08;
-      letter-spacing: -.045em;
-      margin: 0 0 10px;
-    }
-
-    .device-text {
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 15px;
-      margin: 0;
-    }
-
-    .floating-card {
+    .face::before {
+      content: "";
       position: absolute;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.075);
-      backdrop-filter: blur(18px);
-      padding: 16px;
-      box-shadow: 0 20px 50px rgba(0,0,0,.28);
+      inset: 16%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.18);
+      background:
+        linear-gradient(90deg, transparent 48%, rgba(255,255,255,.10) 50%, transparent 52%),
+        linear-gradient(0deg, transparent 48%, rgba(255,255,255,.08) 50%, transparent 52%);
+      opacity: .85;
     }
 
-    .floating-card.one {
-      left: 20px;
-      bottom: 108px;
-      width: 230px;
+    .face::after {
+      content: "AI VIDEO AVATAR";
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      letter-spacing: .14em;
+      color: rgba(255,255,255,.55);
+      white-space: nowrap;
     }
 
-    .floating-card.two {
+    .rings {
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      border: 1px solid rgba(227,188,114,.20);
+      animation: breathe 4s ease-in-out infinite;
+    }
+    .rings.two { width: 410px; height: 410px; border-color: rgba(165,144,255,.13); animation-delay: .8s; }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(.92); opacity: .35; }
+      50% { transform: scale(1.05); opacity: .85; }
+    }
+
+    .caption {
+      position: absolute;
+      left: 22px;
       right: 22px;
-      bottom: 28px;
-      width: 260px;
+      bottom: 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(0,0,0,.38);
+      backdrop-filter: blur(16px);
+      padding: 16px;
+    }
+    .caption .q { color: var(--muted2); font-size: 12px; margin-bottom: 6px; }
+    .caption .a { line-height: 1.45; font-size: 15px; }
+
+    .call-controls {
+      height: 128px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 13px;
+      background: rgba(0,0,0,.24);
     }
 
-    .floating-label {
-      color: var(--muted-2);
-      font-size: 12px;
-      margin-bottom: 7px;
+    .control {
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      font-size: 20px;
     }
+    .control.end { background: rgba(233,157,143,.18); border-color: rgba(233,157,143,.35); color: #ffd1ca; }
 
-    .floating-main {
-      font-size: 15px;
-      line-height: 1.35;
-      font-weight: 650;
+    .source-float {
+      position: absolute;
+      right: 22px;
+      bottom: 116px;
+      width: 245px;
+      border-radius: 22px;
+      border: 1px solid rgba(227,188,114,.25);
+      background: rgba(12,14,20,.72);
+      backdrop-filter: blur(18px);
+      padding: 15px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.35);
     }
+    .source-float small { color: var(--gold2); display: block; margin-bottom: 8px; }
+    .source-float p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
 
-    .stats {
+    .trust-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 32px;
+      gap: 12px;
+      margin-top: 28px;
     }
-
-    .stat {
-      padding: 18px;
+    .trust {
       border-radius: 20px;
+      padding: 16px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.045);
     }
-
-    .stat strong {
-      display: block;
-      font-size: 24px;
-      letter-spacing: -.04em;
-      margin-bottom: 4px;
-      color: var(--gold-2);
-    }
-
-    .stat span {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.35;
-    }
+    .trust strong { color: var(--gold2); display: block; font-size: 21px; letter-spacing: -.04em; margin-bottom: 4px; }
+    .trust span { color: var(--muted); font-size: 13px; line-height: 1.35; }
 
     section { padding: 82px 0; }
 
     .section-head {
       display: grid;
       grid-template-columns: .95fr 1.05fr;
-      gap: 36px;
+      gap: 34px;
       align-items: end;
       margin-bottom: 34px;
     }
-
     .kicker {
-      color: var(--gold-2);
-      font-weight: 720;
-      letter-spacing: .08em;
+      color: var(--gold2);
       text-transform: uppercase;
+      letter-spacing: .09em;
+      font-weight: 820;
       font-size: 12px;
       margin-bottom: 14px;
     }
-
     h2 {
-      font-size: clamp(34px, 4.2vw, 58px);
+      margin: 0;
+      font-size: clamp(33px, 4.3vw, 58px);
       line-height: 1.02;
       letter-spacing: -.06em;
-      margin: 0;
     }
-
-    .section-copy {
+    .copy {
+      margin: 0;
       color: var(--muted);
       line-height: 1.65;
       font-size: 17px;
-      margin: 0;
     }
 
-    .cards-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
+    .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .card {
       border: 1px solid var(--line);
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
+      background: var(--card);
+      border-radius: var(--r-lg);
       padding: 24px;
-      min-height: 240px;
+      min-height: 250px;
       position: relative;
       overflow: hidden;
     }
-
     .card::before {
       content: "";
       position: absolute;
       inset: -1px;
-      background: radial-gradient(circle at 20% 0%, rgba(214,176,109,.16), transparent 32%);
+      background: radial-gradient(circle at 20% 0%, rgba(227,188,114,.16), transparent 33%);
       opacity: 0;
       transition: opacity .2s ease;
       pointer-events: none;
     }
-
     .card:hover::before { opacity: 1; }
-
     .icon {
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 18px;
-      background: rgba(214,176,109,.10);
-      border: 1px solid rgba(214,176,109,.22);
+      border: 1px solid rgba(227,188,114,.24);
+      background: rgba(227,188,114,.09);
       display: grid;
       place-items: center;
-      color: var(--gold-2);
-      margin-bottom: 22px;
+      color: var(--gold2);
       font-size: 22px;
-    }
-
-    .card h3 {
-      margin: 0 0 12px;
-      font-size: 22px;
-      letter-spacing: -.035em;
+      margin-bottom: 21px;
       position: relative;
     }
-
-    .card p {
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0;
-      position: relative;
-    }
+    .card h3 { margin: 0 0 11px; font-size: 22px; letter-spacing: -.035em; position: relative; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.6; position: relative; }
 
     .split {
       display: grid;
       grid-template-columns: .92fr 1.08fr;
-      gap: 22px;
+      gap: 18px;
       align-items: stretch;
     }
-
     .panel {
+      border-radius: var(--r-xl);
       border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
-      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
       padding: 30px;
       box-shadow: 0 22px 70px rgba(0,0,0,.22);
     }
-
-    .quote-card {
-      min-height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    .warning-panel {
       background:
-        linear-gradient(160deg, rgba(214,176,109,.14), rgba(255,255,255,.035)),
-        rgba(255,255,255,.04);
+        radial-gradient(circle at 20% 10%, rgba(233,157,143,.18), transparent 34%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
     }
-
-    .quote-mark {
-      font-size: 68px;
-      line-height: .8;
-      color: var(--gold-2);
-      opacity: .9;
-      margin-bottom: 30px;
-    }
-
-    .quote {
-      font-size: clamp(25px, 3vw, 40px);
-      letter-spacing: -.055em;
+    .big-quote {
+      font-size: clamp(26px, 3.1vw, 42px);
       line-height: 1.08;
-      margin: 0;
+      letter-spacing: -.055em;
+      margin: 0 0 26px;
     }
+    .muted { color: var(--muted); line-height: 1.6; }
 
-    .quote-foot {
-      color: var(--muted);
-      margin-top: 36px;
-      line-height: 1.55;
-    }
-
-    .steps {
-      display: grid;
-      gap: 12px;
-    }
-
+    .steps { display: grid; gap: 12px; }
     .step {
       display: grid;
-      grid-template-columns: 52px 1fr;
+      grid-template-columns: 54px 1fr;
       gap: 16px;
-      padding: 18px;
-      border-radius: 22px;
-      background: rgba(255,255,255,.05);
+      border-radius: 23px;
       border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.045);
+      padding: 18px;
     }
-
     .step-number {
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       border-radius: 18px;
       display: grid;
       place-items: center;
-      background: rgba(214,176,109,.11);
-      color: var(--gold-2);
-      font-weight: 800;
-      border: 1px solid rgba(214,176,109,.25);
+      color: var(--gold2);
+      background: rgba(227,188,114,.10);
+      border: 1px solid rgba(227,188,114,.24);
+      font-weight: 900;
     }
+    .step h3 { margin: 0 0 6px; font-size: 18px; letter-spacing: -.025em; }
+    .step p { margin: 0; color: var(--muted); line-height: 1.55; font-size: 15px; }
 
-    .step h3 {
-      margin: 0 0 6px;
-      letter-spacing: -.025em;
-      font-size: 18px;
-    }
-
-    .step p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-      font-size: 15px;
-    }
-
-    .timeline {
+    .demo-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-top: 26px;
-    }
-
-    .time-item {
-      border-radius: 24px;
+      grid-template-columns: .75fr 1.25fr;
+      border-radius: var(--r-xl);
       border: 1px solid var(--line);
       background: rgba(255,255,255,.045);
-      padding: 20px;
-      min-height: 190px;
-    }
-
-    .time-item .year {
-      color: var(--gold-2);
-      font-size: 13px;
-      font-weight: 740;
-      margin-bottom: 16px;
-    }
-
-    .time-item h3 {
-      margin: 0 0 10px;
-      font-size: 19px;
-      letter-spacing: -.03em;
-    }
-
-    .time-item p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .archive-preview {
-      border-radius: var(--radius-xl);
       overflow: hidden;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.045);
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      min-height: 520px;
+      min-height: 540px;
     }
-
-    .archive-left {
+    .demo-left {
+      border-right: 1px solid var(--line);
       padding: 28px;
       background:
-        radial-gradient(circle at 20% 20%, rgba(214,176,109,.18), transparent 38%),
-        rgba(255,255,255,.03);
-      border-right: 1px solid var(--line);
+        radial-gradient(circle at 28% 15%, rgba(227,188,114,.18), transparent 38%),
+        rgba(255,255,255,.025);
     }
-
-    .archive-left h3 {
-      font-size: 28px;
-      letter-spacing: -.045em;
-      margin: 0 0 12px;
-    }
-
-    .archive-left p {
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 0 0 22px;
-    }
-
-    .folder-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .folder {
+    .demo-left h3 { margin: 0 0 12px; font-size: 29px; letter-spacing: -.045em; }
+    .demo-left p { margin: 0 0 22px; color: var(--muted); line-height: 1.6; }
+    .upload-list { display: grid; gap: 10px; }
+    .upload-item {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      align-items: center;
+      gap: 12px;
       padding: 14px;
       border-radius: 18px;
-      background: rgba(255,255,255,.055);
-      border: 1px solid rgba(255,255,255,.09);
-      color: var(--muted);
-    }
-
-    .folder strong { color: var(--text); font-size: 14px; }
-    .folder span { font-size: 12px; color: var(--muted-2); }
-
-    .archive-right {
-      padding: 28px;
-      display: grid;
-      align-content: start;
-      gap: 16px;
-    }
-
-    .ask-box {
-      border-radius: 24px;
-      padding: 20px;
-      background: rgba(0,0,0,.22);
       border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.055);
     }
+    .upload-item strong { font-size: 14px; }
+    .upload-item span { color: var(--muted2); font-size: 12px; }
 
-    .ask-label {
-      color: var(--muted-2);
-      font-size: 13px;
-      margin-bottom: 12px;
+    .demo-right { padding: 28px; display: grid; gap: 16px; align-content: start; }
+    .chat-bubble {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.11);
+      background: rgba(0,0,0,.22);
+      padding: 20px;
     }
-
-    .ask-question {
-      font-size: 21px;
-      letter-spacing: -.025em;
-      margin-bottom: 18px;
-    }
-
-    .answer {
-      color: var(--muted);
-      line-height: 1.6;
-      border-left: 2px solid rgba(214,176,109,.55);
-      padding-left: 14px;
-    }
-
-    .source-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-
+    .chat-label { color: var(--muted2); font-size: 13px; margin-bottom: 11px; }
+    .chat-q { font-size: 21px; letter-spacing: -.025em; margin-bottom: 14px; }
+    .chat-a { color: var(--muted); line-height: 1.62; border-left: 2px solid rgba(227,188,114,.56); padding-left: 14px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
     .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
       border-radius: 999px;
+      border: 1px solid rgba(227,188,114,.24);
+      background: rgba(227,188,114,.08);
+      color: var(--gold2);
       padding: 7px 10px;
-      background: rgba(214,176,109,.08);
-      border: 1px solid rgba(214,176,109,.22);
-      color: var(--gold-2);
       font-size: 12px;
     }
 
-    .ethics-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .ethics-item {
+    .limits { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .limit {
+      padding: 22px;
       border-radius: 24px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.045);
-      padding: 22px;
     }
+    .limit h3 { margin: 0 0 9px; font-size: 20px; letter-spacing: -.03em; }
+    .limit p { margin: 0; color: var(--muted); line-height: 1.58; }
 
-    .ethics-item h3 {
-      margin: 0 0 9px;
-      letter-spacing: -.025em;
-      font-size: 20px;
-    }
-
-    .ethics-item p {
-      color: var(--muted);
-      line-height: 1.58;
-      margin: 0;
-    }
-
-    .pricing {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      align-items: stretch;
-    }
-
+    .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .price-card {
-      border-radius: 30px;
+      border-radius: 31px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.05);
       padding: 26px;
       position: relative;
       overflow: hidden;
     }
-
     .price-card.featured {
       background:
-        radial-gradient(circle at 50% 0%, rgba(214,176,109,.24), transparent 36%),
+        radial-gradient(circle at 50% 0%, rgba(227,188,114,.23), transparent 36%),
         rgba(255,255,255,.075);
-      border-color: rgba(214,176,109,.35);
+      border-color: rgba(227,188,114,.35);
       transform: translateY(-12px);
       box-shadow: var(--shadow);
     }
-
     .tag {
       position: absolute;
       top: 18px;
       right: 18px;
-      font-size: 12px;
-      color: #1d1409;
-      background: var(--gold-2);
       border-radius: 999px;
       padding: 7px 10px;
-      font-weight: 800;
-    }
-
-    .price-card h3 {
-      font-size: 25px;
-      letter-spacing: -.04em;
-      margin: 0 0 10px;
-    }
-
-    .price {
-      font-size: 38px;
-      letter-spacing: -.055em;
-      margin: 18px 0 18px;
-      font-weight: 820;
-    }
-
-    .price small {
-      font-size: 14px;
-      color: var(--muted);
-      letter-spacing: 0;
-      font-weight: 500;
-    }
-
-    .features {
-      list-style: none;
-      padding: 0;
-      margin: 22px 0 0;
-      display: grid;
-      gap: 12px;
-      color: var(--muted);
-      line-height: 1.45;
-    }
-
-    .features li {
-      display: grid;
-      grid-template-columns: 22px 1fr;
-      gap: 8px;
-    }
-
-    .features li::before {
-      content: "✓";
-      color: var(--gold-2);
+      background: var(--gold2);
+      color: #201405;
+      font-size: 12px;
       font-weight: 900;
     }
+    .price-card h3 { margin: 0 0 10px; font-size: 25px; letter-spacing: -.04em; }
+    .price-card p { color: var(--muted); line-height: 1.55; margin: 0; }
+    .price { margin: 20px 0 18px; font-size: 38px; font-weight: 900; letter-spacing: -.055em; }
+    .price small { font-size: 14px; color: var(--muted); font-weight: 500; letter-spacing: 0; }
+    .features { padding: 0; margin: 22px 0 0; list-style: none; display: grid; gap: 12px; color: var(--muted); }
+    .features li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; line-height: 1.45; }
+    .features li::before { content: "✓"; color: var(--gold2); font-weight: 900; }
 
-    .faq {
-      display: grid;
-      gap: 10px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
+    .faq { display: grid; gap: 10px; max-width: 900px; margin: 0 auto; }
     details {
       border-radius: 22px;
       border: 1px solid var(--line);
       background: rgba(255,255,255,.045);
       padding: 18px 20px;
     }
-
     summary {
-      cursor: pointer;
-      font-weight: 720;
-      letter-spacing: -.02em;
       list-style: none;
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       gap: 18px;
+      font-weight: 780;
+      letter-spacing: -.02em;
     }
-
     summary::-webkit-details-marker { display: none; }
-    summary::after { content: "+"; color: var(--gold-2); }
+    summary::after { content: "+"; color: var(--gold2); }
     details[open] summary::after { content: "–"; }
+    details p { color: var(--muted); line-height: 1.62; margin: 14px 0 0; }
 
-    details p {
-      color: var(--muted);
-      line-height: 1.6;
-      margin: 14px 0 0;
-    }
-
-    .cta {
-      padding: 96px 0;
-    }
-
+    .cta { padding: 96px 0; }
     .cta-box {
       border-radius: 44px;
-      border: 1px solid rgba(214,176,109,.25);
+      border: 1px solid rgba(227,188,114,.26);
       background:
-        radial-gradient(circle at 22% 20%, rgba(214,176,109,.26), transparent 34%),
-        radial-gradient(circle at 80% 70%, rgba(154,184,157,.16), transparent 34%),
+        radial-gradient(circle at 18% 18%, rgba(227,188,114,.25), transparent 34%),
+        radial-gradient(circle at 84% 70%, rgba(165,144,255,.18), transparent 34%),
         linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
       padding: clamp(32px, 6vw, 68px);
       text-align: center;
       box-shadow: var(--shadow);
     }
+    .cta-box h2 { max-width: 880px; margin: 0 auto 20px; }
+    .cta-box p { max-width: 760px; margin: 0 auto 30px; color: var(--muted); line-height: 1.62; font-size: 18px; }
 
-    .cta-box h2 {
-      max-width: 850px;
-      margin: 0 auto 20px;
-    }
-
-    .cta-box p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 18px;
-      max-width: 720px;
-      margin: 0 auto 30px;
-    }
-
-    .form {
-      display: grid;
-      grid-template-columns: 1fr 1fr auto;
-      gap: 10px;
-      max-width: 850px;
-      margin: 0 auto;
-    }
-
+    .form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; max-width: 880px; margin: 0 auto; }
     .input {
       min-height: 54px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.13);
-      background: rgba(0,0,0,.24);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.26);
       color: var(--text);
-      padding: 0 18px;
       outline: none;
+      padding: 0 18px;
       font-size: 15px;
     }
-
-    .input::placeholder { color: rgba(246,240,232,.45); }
-    .input:focus { border-color: rgba(214,176,109,.55); }
+    .input::placeholder { color: rgba(248,244,237,.45); }
+    .input:focus { border-color: rgba(227,188,114,.55); }
 
     .footer {
-      border-top: 1px solid rgba(255,255,255,.09);
       padding: 32px 0;
-      color: var(--muted-2);
+      border-top: 1px solid rgba(255,255,255,.09);
+      color: var(--muted2);
       font-size: 14px;
     }
-
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .mobile-only { display: none; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
 
     @media (max-width: 980px) {
-      .hero-grid,
-      .section-head,
-      .split,
-      .archive-preview {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card { min-height: 560px; }
-      .cards-3, .pricing, .timeline, .stats { grid-template-columns: repeat(2, 1fr); }
+      .hero-grid, .section-head, .split, .demo-grid { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 640px; }
+      .cards-3, .trust-row, .pricing, .limits { grid-template-columns: repeat(2, 1fr); }
+      .demo-left { border-right: 0; border-bottom: 1px solid var(--line); }
       .form { grid-template-columns: 1fr; }
       .price-card.featured { transform: none; }
-      .archive-left { border-right: 0; border-bottom: 1px solid var(--line); }
     }
 
     @media (max-width: 720px) {
       .container { width: min(100% - 28px, var(--max)); }
       .nav-inner { height: 66px; }
       .nav-links { display: none; }
-      .hero { padding: 58px 0 50px; }
-      section { padding: 60px 0; }
-      .hero-card { min-height: 560px; padding: 18px; border-radius: 32px; }
-      .memory-device { inset: 82px 18px auto; padding: 20px; }
-      .floating-card.one { left: 16px; bottom: 110px; width: calc(100% - 32px); }
-      .floating-card.two { right: 16px; bottom: 18px; width: calc(100% - 32px); }
-      .cards-3, .pricing, .timeline, .stats, .ethics-grid { grid-template-columns: 1fr; }
-      .panel { padding: 22px; border-radius: 26px; }
-      .cta-box { border-radius: 30px; }
-      .mobile-only { display: inline; }
-      .desktop-only { display: none; }
+      .hero { padding: 56px 0 46px; }
+      section { padding: 58px 0; }
+      .hero-visual { min-height: 600px; border-radius: 32px; }
+      .call-window { inset: 16px; border-radius: 28px; }
+      .call-top { padding: 0 14px; }
+      .video-face { height: 365px; }
+      .source-float { left: 16px; right: 16px; width: auto; bottom: 112px; }
+      .caption { left: 14px; right: 14px; }
+      .cards-3, .trust-row, .pricing, .limits { grid-template-columns: 1fr; }
+      .panel { padding: 22px; border-radius: 28px; }
+      .cta-box { border-radius: 31px; }
+      .call-status { display: none; }
     }
   </style>
 </head>
 
 <body>
-  <div class="noise"></div>
+  <div class="grain"></div>
   <div class="page">
     <nav class="nav">
       <div class="container nav-inner">
-        <a href="#top" class="brand" aria-label="Голос Рода">
-          <span class="brand-mark">G</span>
-          <span>Голос Рода</span>
+        <a href="#top" class="brand" aria-label="LastCall AI">
+          <span class="brand-mark">L</span>
+          <span>LastCall AI</span>
         </a>
         <div class="nav-links">
           <a href="#how">Как работает</a>
-          <a href="#archive">Архив</a>
-          <a href="#ethics">Этика</a>
+          <a href="#demo">Демо звонка</a>
+          <a href="#safety">Безопасность</a>
           <a href="#pricing">Тарифы</a>
-          <a href="#contact" class="nav-cta">Записаться в ранний доступ</a>
+          <a class="nav-cta" href="#contact">Ранний доступ</a>
         </div>
       </div>
     </nav>
@@ -975,53 +726,58 @@
     <header class="hero" id="top">
       <div class="container hero-grid">
         <div>
-          <div class="eyebrow"><span class="pulse"></span> Семейная капсула памяти с AI-биографом</div>
-          <h1>Сохраните голос, истории и смыслы вашей семьи</h1>
+          <div class="badge"><span class="pulse"></span> AI-видеозвонок с теми, чей голос хочется услышать снова</div>
+          <h1>Позвоните покойному родственнику через <span class="soft-gradient">AI-видеоаватар</span></h1>
           <p class="lead">
-            AI-биограф помогает записать важные воспоминания, превратить их в цифровую биографию,
-            семейный архив и капсулы времени для детей, внуков и будущих поколений.
+            LastCall AI создает бережный видеоаватар близкого человека на основе фото, видео, голоса, писем и семейных воспоминаний — чтобы семья могла задать вопрос, услышать голос и увидеть лицо снова.
           </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#contact">Создать капсулу памяти</a>
-            <a class="btn btn-secondary" href="#how">Посмотреть, как это работает</a>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact">Создать первый звонок</a>
+            <a class="btn btn-secondary" href="#demo">Посмотреть сценарий</a>
           </div>
-          <p class="microcopy">
-            Не «цифровой двойник» и не имитация человека. Только бережное сохранение того, что человек сам решил оставить.
+          <p class="note">
+            Сервис всегда сообщает, что это ИИ-аватар. Ответы строятся на загруженных материалах, а семья управляет доступом, временем звонков и режимами общения.
           </p>
 
-          <div class="stats">
-            <div class="stat"><strong>30+</strong><span>глубоких вопросов для семейной биографии</span></div>
-            <div class="stat"><strong>AI</strong><span>структурирует аудио, фото, письма и документы</span></div>
-            <div class="stat"><strong>100%</strong><span>ответы только на основе ваших материалов</span></div>
-            <div class="stat"><strong>∞</strong><span>капсулы времени для важных дат</span></div>
+          <div class="trust-row">
+            <div class="trust"><strong>Фото</strong><span>портреты, альбомы, архивные снимки</span></div>
+            <div class="trust"><strong>Видео</strong><span>семейные записи и интервью</span></div>
+            <div class="trust"><strong>Голос</strong><span>аудио, звонки, голосовые сообщения</span></div>
+            <div class="trust"><strong>Письма</strong><span>тексты, заметки, воспоминания</span></div>
           </div>
         </div>
 
-        <div class="hero-card" aria-label="Демо цифровой капсулы памяти">
-          <div class="orb"></div>
-          <div class="memory-device">
-            <div class="device-top">
-              <div class="dots"><span></span><span></span><span></span></div>
-              <div class="device-badge">Запись истории</div>
+        <div class="hero-visual" aria-label="Демо видеозвонка с AI-аватаром">
+          <div class="call-window">
+            <div class="call-top">
+              <div class="call-person">
+                <div class="avatar-dot">М</div>
+                <div>
+                  <strong>Мама · AI-видеоаватар</strong>
+                  <span>создано на основе семейного архива</span>
+                </div>
+              </div>
+              <div class="call-status">звонок идет · 03:18</div>
             </div>
-            <div class="wave" aria-hidden="true">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
-              <span></span><span></span><span></span><span></span><span></span><span></span>
+            <div class="video-face">
+              <div class="rings"></div>
+              <div class="rings two"></div>
+              <div class="face"></div>
+              <div class="caption">
+                <div class="q">Вы спросили:</div>
+                <div class="a">«Что бы ты сказала мне, когда мне страшно начинать новую жизнь?»</div>
+              </div>
             </div>
-            <h2 class="device-title">«Расскажите, какой семейный момент нельзя потерять?»</h2>
-            <p class="device-text">
-              ИИ задает уточняющие вопросы, расшифровывает голос, собирает главы биографии и связывает историю с фото, датами и людьми.
-            </p>
-          </div>
-
-          <div class="floating-card one">
-            <div class="floating-label">Новая глава</div>
-            <div class="floating-main">Детство, дом у реки и первое большое решение</div>
-          </div>
-
-          <div class="floating-card two">
-            <div class="floating-label">Капсула времени</div>
-            <div class="floating-main">Письмо дочери на 18-летие — откроется 12.08.2038</div>
+            <div class="source-float">
+              <small>Ответ основан на источниках</small>
+              <p>Видео 2018 года, письмо дочери и 4 голосовые записи из семейного архива.</p>
+            </div>
+            <div class="call-controls">
+              <div class="control">🎙</div>
+              <div class="control">📹</div>
+              <div class="control end">✕</div>
+              <div class="control">☰</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1031,31 +787,29 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="kicker">Проблема</div>
-            <h2>Мы сохраняем фото. Но теряем контекст.</h2>
+            <div class="kicker">Идея</div>
+            <h2>Не просто архив. Возможность снова поговорить.</h2>
           </div>
-          <p class="section-copy">
-            Через годы в семейном архиве остаются тысячи снимков, но исчезают голоса, объяснения, интонации,
-            семейные легенды и ответы на вопросы, которые уже некому задать. «Голос Рода» помогает сохранить
-            не просто файлы, а живую ткань памяти.
+          <p class="copy">
+            Обычно после потери остаются фотографии, видео и переписки. Но они молчат. LastCall AI превращает семейный архив в интерактивный видеозвонок: человек задает вопрос, а AI-аватар отвечает голосом и образом родственника — только в рамках сохраненных воспоминаний.
           </p>
         </div>
 
         <div class="cards-3">
           <div class="card">
-            <div class="icon">◌</div>
-            <h3>Голос</h3>
-            <p>Аудиоистории, письма и воспоминания сохраняются в оригинальной интонации человека.</p>
+            <div class="icon">☎</div>
+            <h3>Звонок памяти</h3>
+            <p>Пользователь открывает видеозвонок с AI-аватаром родственника и задает вопросы голосом или текстом.</p>
           </div>
           <div class="card">
-            <div class="icon">✦</div>
-            <h3>Истории</h3>
-            <p>ИИ превращает разрозненные рассказы в понятную цифровую биографию и семейную хронику.</p>
+            <div class="icon">◉</div>
+            <h3>Видеоаватар</h3>
+            <p>Образ создается по фото и видео, а голос — по доступным аудиозаписям или заранее записанным материалам.</p>
           </div>
           <div class="card">
-            <div class="icon">⌁</div>
-            <h3>Смыслы</h3>
-            <p>Сохраняются ценности, уроки, принципы, семейные традиции и личные послания будущим поколениям.</p>
+            <div class="icon">▣</div>
+            <h3>Ответы из архива</h3>
+            <p>ИИ не должен фантазировать. Каждый ответ связывается с источником: видео, письмом, голосовой записью или семейной заметкой.</p>
           </div>
         </div>
       </div>
@@ -1063,46 +817,44 @@
 
     <section id="how">
       <div class="container split">
-        <div class="panel quote-card">
-          <div>
-            <div class="quote-mark">“</div>
-            <p class="quote">Пока человек рядом, его голос кажется обычным. Потом именно его больше всего не хватает.</p>
-          </div>
-          <p class="quote-foot">
-            Поэтому продукт начинается не с технологий, а с бережного разговора: что важно сохранить, кому передать и когда открыть.
+        <div class="panel warning-panel">
+          <div class="kicker">Позиционирование</div>
+          <p class="big-quote">«Позвони тому, чей голос остался в сердце, но не в телефоне»</p>
+          <p class="muted">
+            Продукт должен быть сильным, но бережным: это не мистификация и не обещание «вернуть человека». Это AI-технология для разговора с цифровой памятью, собранной из реальных семейных материалов.
           </p>
         </div>
 
         <div class="panel">
-          <div class="kicker">Как работает</div>
-          <h2 style="font-size: clamp(32px, 3vw, 46px); margin-bottom: 22px;">От разговора — к семейному наследию</h2>
+          <div class="kicker">Процесс</div>
+          <h2 style="font-size: clamp(32px, 3vw, 46px); margin-bottom: 22px;">Как создается звонок</h2>
           <div class="steps">
             <div class="step">
               <div class="step-number">01</div>
               <div>
-                <h3>AI-интервью</h3>
-                <p>Человек отвечает голосом или текстом на вопросы о жизни, семье, решениях, любви, работе и ценностях.</p>
+                <h3>Загрузка материалов</h3>
+                <p>Семья загружает фото, видео, голосовые, письма, дневники, переписки и воспоминания родственников.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">02</div>
               <div>
-                <h3>Структурирование памяти</h3>
-                <p>ИИ расшифровывает ответы, задает уточняющие вопросы и собирает главы биографии.</p>
+                <h3>Сбор личности архива</h3>
+                <p>ИИ анализирует речь, факты, ценности, важные истории, близких людей и характерные формулировки.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">03</div>
               <div>
-                <h3>Архив семьи</h3>
-                <p>Фото, документы, письма и видео связываются с людьми, датами, местами и историями.</p>
+                <h3>Создание AI-видеоаватара</h3>
+                <p>Система создает визуальный образ, голосовой профиль и сценарии ответов с привязкой к источникам.</p>
               </div>
             </div>
             <div class="step">
               <div class="step-number">04</div>
               <div>
-                <h3>Капсулы времени</h3>
-                <p>Послания можно открыть в будущем: на день рождения, выпускной, свадьбу или важный семейный момент.</p>
+                <h3>Бережный видеозвонок</h3>
+                <p>Пользователь звонит, задает вопросы, слышит ответ и видит, на каких материалах он основан.</p>
               </div>
             </div>
           </div>
@@ -1110,88 +862,54 @@
       </div>
     </section>
 
-    <section>
+    <section id="demo">
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="kicker">Сценарии</div>
-            <h2>Что можно сохранить</h2>
+            <div class="kicker">Демо сценарий</div>
+            <h2>Как может выглядеть разговор</h2>
           </div>
-          <p class="section-copy">
-            Продукт подходит не только для пожилых родственников. Это может быть семейная книга, архив основателя бизнеса,
-            письмо ребенку в будущее или хроника целого рода.
+          <p class="copy">
+            Главный принцип: аватар не говорит «я жив» и не подменяет реального человека. Он отвечает как цифровое воспоминание, созданное из архива семьи.
           </p>
         </div>
 
-        <div class="timeline">
-          <div class="time-item">
-            <div class="year">01</div>
-            <h3>Истории детства</h3>
-            <p>Дом, родители, первые друзья, семейные привычки, места силы и моменты, которые сформировали человека.</p>
-          </div>
-          <div class="time-item">
-            <div class="year">02</div>
-            <h3>Письма детям</h3>
-            <p>Личные послания, советы, поддержка и ответы на вопросы, которые ребенок сможет открыть позже.</p>
-          </div>
-          <div class="time-item">
-            <div class="year">03</div>
-            <h3>История семьи</h3>
-            <p>Родословная, переезды, фамильные истории, традиции, рецепты, семейные документы и архивные фото.</p>
-          </div>
-          <div class="time-item">
-            <div class="year">04</div>
-            <h3>Наследие дела</h3>
-            <p>История компании, принципы основателя, ошибки, решения и послания будущим руководителям.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="archive">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">AI-архив</div>
-            <h2>Спросите не бота. Спросите семейный архив.</h2>
-          </div>
-          <p class="section-copy">
-            Система отвечает только на основе загруженных записей, писем, фото и документов. Если в архиве нет подтверждения,
-            ИИ честно говорит, что не знает ответа.
-          </p>
-        </div>
-
-        <div class="archive-preview">
-          <div class="archive-left">
-            <h3>Семейная библиотека</h3>
-            <p>Материалы раскладываются не по папкам, а по смысловым главам жизни.</p>
-            <div class="folder-list">
-              <div class="folder"><strong>Голосовые истории</strong><span>42 записи</span></div>
-              <div class="folder"><strong>Фото с объяснениями</strong><span>186 файлов</span></div>
-              <div class="folder"><strong>Письма в будущее</strong><span>9 капсул</span></div>
-              <div class="folder"><strong>Семейное дерево</strong><span>4 поколения</span></div>
-              <div class="folder"><strong>Ценности и принципы</strong><span>12 заметок</span></div>
+        <div class="demo-grid">
+          <div class="demo-left">
+            <h3>Материалы для аватара</h3>
+            <p>Чем больше качественных материалов, тем точнее и бережнее получится разговор.</p>
+            <div class="upload-list">
+              <div class="upload-item"><strong>Фото лица</strong><span>24 файла</span></div>
+              <div class="upload-item"><strong>Семейные видео</strong><span>8 видео</span></div>
+              <div class="upload-item"><strong>Голосовые записи</strong><span>2 ч 40 мин</span></div>
+              <div class="upload-item"><strong>Письма и заметки</strong><span>17 документов</span></div>
+              <div class="upload-item"><strong>Истории родственников</strong><span>11 ответов</span></div>
             </div>
           </div>
-          <div class="archive-right">
-            <div class="ask-box">
-              <div class="ask-label">Вопрос к архиву</div>
-              <div class="ask-question">Почему наша семья переехала в другой город?</div>
-              <div class="answer">
-                По записи от 14 марта 2026 года, решение было связано с работой, учебой детей и желанием быть ближе к бабушке.
-                В архиве также есть фото первого дома и письмо, где это объясняется подробнее.
+
+          <div class="demo-right">
+            <div class="chat-bubble">
+              <div class="chat-label">Вопрос во время звонка</div>
+              <div class="chat-q">«Бабушка, как ты переживала сложные времена?»</div>
+              <div class="chat-a">
+                «В семейных записях есть история, где я говорила: главное — не пытаться быть сильной каждый день. Иногда нужно просто сварить чай, сделать одно маленькое дело и пережить этот день. Завтра станет легче».
               </div>
-              <div class="source-line">
-                <span class="pill">Аудио 14.03.2026</span>
-                <span class="pill">Фотоальбом «Переезд»</span>
-                <span class="pill">Письмо детям</span>
+              <div class="pills">
+                <span class="pill">Видео 2009</span>
+                <span class="pill">Аудио 2016</span>
+                <span class="pill">Письмо внучке</span>
               </div>
             </div>
-            <div class="ask-box">
-              <div class="ask-label">Принцип безопасности</div>
-              <div class="ask-question">ИИ не придумывает воспоминания</div>
-              <div class="answer">
-                Каждый ответ должен быть связан с источником. Если материала недостаточно, система предложит записать новую историю или уточнить у родственников.
+
+            <div class="chat-bubble">
+              <div class="chat-label">Если данных недостаточно</div>
+              <div class="chat-q">«Что ты думаешь о моей новой работе?»</div>
+              <div class="chat-a">
+                «В архиве нет прямого ответа на этот вопрос. Но в сохраненных письмах есть принцип: выбирать дело, где ты растешь и не предаешь себя. Я могу показать эти письма».
+              </div>
+              <div class="pills">
+                <span class="pill">Без выдуманных фактов</span>
+                <span class="pill">Ответ с ограничением</span>
               </div>
             </div>
           </div>
@@ -1199,35 +917,42 @@
       </div>
     </section>
 
-    <section id="ethics">
+    <section id="safety">
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="kicker">Этика</div>
-            <h2>Не имитация человека. Бережное хранение памяти.</h2>
+            <div class="kicker">Ограничители</div>
+            <h2>Чтобы звонок помогал, а не затягивал в боль</h2>
           </div>
-          <p class="section-copy">
-            Мы не создаем иллюзию, что человек «вернулся». Мы помогаем сохранить то, что он сам хочет передать: голос,
-            истории, письма, ценности и контекст семейной жизни.
+          <p class="copy">
+            Для такого продукта безопасность — часть дизайна. Нужны лимиты, прозрачность, семейный контроль и уважение к памяти человека.
           </p>
         </div>
 
-        <div class="ethics-grid">
-          <div class="ethics-item">
-            <h3>Добровольное согласие</h3>
-            <p>Архив создается только с согласия человека или законного владельца материалов.</p>
+        <div class="limits">
+          <div class="limit">
+            <h3>Всегда видно, что это ИИ</h3>
+            <p>На экране звонка постоянно отображается статус «AI-видеоаватар, созданный на основе семейного архива».</p>
           </div>
-          <div class="ethics-item">
-            <h3>Прозрачность ИИ</h3>
-            <p>Система всегда обозначает, что ответ сформирован ИИ на основе сохраненного архива.</p>
-          </div>
-          <div class="ethics-item">
+          <div class="limit">
             <h3>Ответы с источниками</h3>
-            <p>Каждая история связывается с записью, датой, фото или документом. Без источника — нет выдуманного ответа.</p>
+            <p>Каждый ответ показывает, на чем он основан: видео, аудио, письма, фото или заметки родственников.</p>
           </div>
-          <div class="ethics-item">
-            <h3>Контроль семьи</h3>
-            <p>Можно ограничить доступ, скрыть главы, удалить материалы или временно отключить интерактивный режим.</p>
+          <div class="limit">
+            <h3>Лимиты разговора</h3>
+            <p>Можно ограничить длительность звонков, частоту использования и временно отключить аватара.</p>
+          </div>
+          <div class="limit">
+            <h3>Запрет опасных тем</h3>
+            <p>Аватар не дает медицинские, юридические, финансовые советы и не говорит фразы, усиливающие зависимость.</p>
+          </div>
+          <div class="limit">
+            <h3>Семейный доступ</h3>
+            <p>Владелец архива управляет тем, кто может звонить, какие темы доступны и какие материалы скрыты.</p>
+          </div>
+          <div class="limit">
+            <h3>Согласие и удаление</h3>
+            <p>Нужны согласия на использование материалов. Семья может удалить архив, голосовой профиль или видеоаватар.</p>
           </div>
         </div>
       </div>
@@ -1237,57 +962,57 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="kicker">Форматы</div>
-            <h2>От первой истории до семейного архива</h2>
+            <div class="kicker">Тарифы</div>
+            <h2>Форматы запуска</h2>
           </div>
-          <p class="section-copy">
-            На старте можно продавать как concierge-сервис: вы лично помогаете семье собрать материалы,
-            а ИИ ускоряет интервью, расшифровку и сборку биографии.
+          <p class="copy">
+            Для MVP лучше начать с ручного премиального сервиса: собрать материалы, сделать цифровой архив, подготовить ограниченный звонок и проверить эмоциональную реакцию семей.
           </p>
         </div>
 
         <div class="pricing">
           <div class="price-card">
-            <h3>Первая капсула</h3>
-            <p class="section-copy" style="font-size: 15px;">Для тех, кто хочет начать с одной личной истории.</p>
-            <div class="price">9 900 ₽</div>
-            <a class="btn btn-secondary" href="#contact" style="width: 100%;">Оставить заявку</a>
+            <h3>Memory Call</h3>
+            <p>Первый аудио/видео-звонок по архивным материалам.</p>
+            <div class="price">29 900 ₽</div>
+            <a class="btn btn-secondary" href="#contact" style="width:100%;">Оставить заявку</a>
             <ul class="features">
-              <li>1 AI-интервью</li>
-              <li>До 60 минут аудио</li>
-              <li>Расшифровка и редактура</li>
-              <li>PDF-глава биографии</li>
-              <li>5 вопросов для продолжения архива</li>
+              <li>Загрузка фото и голоса</li>
+              <li>До 30 минут материалов</li>
+              <li>Сценарий на 10 вопросов</li>
+              <li>AI-ответы с источниками</li>
+              <li>1 тестовый звонок</li>
             </ul>
           </div>
 
           <div class="price-card featured">
-            <div class="tag">Популярно</div>
-            <h3>Семейная капсула</h3>
-            <p class="section-copy" style="font-size: 15px;">Для родителей, бабушек, дедушек и семейных архивов.</p>
-            <div class="price">49 900 ₽</div>
-            <a class="btn btn-primary" href="#contact" style="width: 100%;">Записаться</a>
+            <div class="tag">MVP</div>
+            <h3>Legacy Call</h3>
+            <p>Полноценный видеоаватар родственника для семейных звонков.</p>
+            <div class="price">149 000 ₽</div>
+            <a class="btn btn-primary" href="#contact" style="width:100%;">Записаться</a>
             <ul class="features">
-              <li>5 AI-интервью</li>
-              <li>До 10 часов аудио</li>
-              <li>Фото и документы с подписями</li>
-              <li>Цифровая биография</li>
-              <li>10 капсул времени</li>
-              <li>Семейный архив с вопросами к материалам</li>
+              <li>Фото, видео, голос и письма</li>
+              <li>AI-профиль личности архива</li>
+              <li>Видеоаватар</li>
+              <li>До 100 вопросов</li>
+              <li>Семейный кабинет доступа</li>
+              <li>Лимиты и режим отключения</li>
             </ul>
           </div>
 
           <div class="price-card">
-            <h3>Наследие основателя</h3>
-            <p class="section-copy" style="font-size: 15px;">Для предпринимателей, экспертов и семейных офисов.</p>
-            <div class="price">от 150 000 ₽</div>
-            <a class="btn btn-secondary" href="#contact" style="width: 100%;">Обсудить проект</a>
+            <h3>Family Eternity</h3>
+            <p>Семейная система памяти для нескольких родственников.</p>
+            <div class="price">от 390 000 ₽</div>
+            <a class="btn btn-secondary" href="#contact" style="width:100%;">Обсудить</a>
             <ul class="features">
-              <li>Глубокие интервью</li>
-              <li>История компании или семьи</li>
-              <li>Принципы и управленческое наследие</li>
-              <li>Премиальная книга</li>
-              <li>Фильм/аудиоверсия по запросу</li>
+              <li>Несколько AI-аватаров</li>
+              <li>Семейное древо</li>
+              <li>Цифровой архив рода</li>
+              <li>Капсулы времени</li>
+              <li>Премиальная книга памяти</li>
+              <li>Индивидуальная юридическая упаковка</li>
             </ul>
           </div>
         </div>
@@ -1296,28 +1021,33 @@
 
     <section>
       <div class="container">
-        <div class="section-head" style="grid-template-columns: 1fr; text-align: center; max-width: 820px; margin-left: auto; margin-right: auto;">
+        <div class="section-head" style="grid-template-columns:1fr; text-align:center; max-width:850px; margin-left:auto; margin-right:auto;">
           <div>
-            <div class="kicker">Вопросы</div>
-            <h2>Что важно знать</h2>
+            <div class="kicker">FAQ</div>
+            <h2>Вопросы, которые возникнут сразу</h2>
           </div>
         </div>
+
         <div class="faq">
           <details open>
-            <summary>Это будет выглядеть мрачно?</summary>
-            <p>Нет. Позиционирование строится вокруг семейной памяти, биографии, голоса и писем в будущее. Это не сервис про смерть, а сервис про сохранение жизни в историях.</p>
+            <summary>Это этично?</summary>
+            <p>Этичность зависит от реализации. Нельзя обманывать пользователя, будто человек жив. Нужно явно показывать, что это AI-аватар, отвечающий на основе архива, а не реальный родственник.</p>
           </details>
           <details>
-            <summary>ИИ будет говорить от имени человека?</summary>
-            <p>Нет в базовой версии. ИИ отвечает как архивный помощник: «по записи такого-то дня человек рассказывал…». Это снижает этические риски и делает продукт достовернее.</p>
+            <summary>Можно ли сделать аватар без согласия человека при жизни?</summary>
+            <p>Для серьезного продукта лучше закладывать модель согласий и семейного управления доступом. Если человек не оставил согласие, нужны отдельные юридические правила, подтверждение прав на материалы и ограничения по использованию.</p>
           </details>
           <details>
-            <summary>Можно ли добавить голос?</summary>
-            <p>Можно хранить оригинальные голосовые записи и создавать аудиоархив. Генерацию синтетического голоса лучше включать только отдельным согласием и не использовать для имитации живого общения.</p>
+            <summary>Что делать, если ИИ не знает ответа?</summary>
+            <p>Он должен честно сказать, что в архиве нет данных. Запрещено придумывать воспоминания, факты, эмоции или обещания от лица умершего человека.</p>
           </details>
           <details>
-            <summary>С чего начать MVP?</summary>
-            <p>Начните с Telegram-бота или простой формы: 30 вопросов, загрузка аудио, расшифровка, PDF-биография и 3–5 капсул времени. Первые заказы лучше делать вручную как премиальный сервис.</p>
+            <summary>Можно ли пользоваться детям?</summary>
+            <p>Лучше делать детский доступ только через взрослого и с ограниченным режимом: заранее подготовленные ответы, письма, семейные истории, без свободного бесконечного общения.</p>
+          </details>
+          <details>
+            <summary>С чего начать технически?</summary>
+            <p>Сначала сделайте лендинг и принимайте заявки. Первую версию можно собрать вручную: загрузка материалов → расшифровка → база знаний → чат/голосовой ответ → простая видеоанимация. Real-time видеоаватар — следующий этап.</p>
           </details>
         </div>
       </div>
@@ -1327,19 +1057,17 @@
       <div class="container">
         <div class="cta-box">
           <div class="kicker">Ранний доступ</div>
-          <h2>Запишите 30 историй, которые ваша семья не должна потерять</h2>
+          <h2>Создайте первый AI-звонок с близким человеком</h2>
           <p>
-            Оставьте заявку, и мы поможем собрать первую семейную капсулу памяти: голосовые истории,
-            цифровую биографию и письма в будущее.
+            Оставьте заявку. Мы свяжемся, объясним, какие фото, видео и голосовые записи нужны, и поможем собрать первый безопасный сценарий звонка.
           </p>
-
           <form class="form" onsubmit="sendForm(event)">
             <input class="input" id="name" type="text" placeholder="Ваше имя" required />
             <input class="input" id="contactField" type="text" placeholder="Телефон или Telegram" required />
-            <button class="btn btn-primary" type="submit">Отправить</button>
+            <button class="btn btn-primary" type="submit">Хочу ранний доступ</button>
           </form>
-          <p class="microcopy" style="margin-top: 16px;">
-            Замените в коде ссылку Telegram на свою. Сейчас форма открывает сообщение в Telegram/браузере.
+          <p class="note" style="margin:16px auto 0; text-align:center;">
+            В коде замените YOUR_TELEGRAM_USERNAME на ваш Telegram username без @.
           </p>
         </div>
       </div>
@@ -1347,10 +1075,10 @@
 
     <footer class="footer">
       <div class="container footer-inner">
-        <div>© 2026 Голос Рода. Семейная память с AI-биографом.</div>
+        <div>© 2026 LastCall AI. AI-видеозвонки с цифровой памятью близких.</div>
         <div class="footer-links">
-          <a href="#ethics">Этика</a>
-          <a href="#pricing">Тарифы</a>
+          <a href="#how">Как работает</a>
+          <a href="#safety">Безопасность</a>
           <a href="#contact">Контакты</a>
         </div>
       </div>
@@ -1360,23 +1088,16 @@
   <script>
     function sendForm(event) {
       event.preventDefault();
-
       const name = document.getElementById('name').value.trim();
       const contact = document.getElementById('contactField').value.trim();
-
-      const message = `Здравствуйте! Хочу ранний доступ к сервису «Голос Рода».%0A%0AИмя: ${encodeURIComponent(name)}%0AКонтакт: ${encodeURIComponent(contact)}`;
-
-      // 1) Замените username ниже на ваш Telegram без @
-      // Пример: https://t.me/eastside_ai
       const telegramUsername = 'YOUR_TELEGRAM_USERNAME';
+      const message = `Здравствуйте! Хочу ранний доступ к LastCall AI.%0A%0AИмя: ${encodeURIComponent(name)}%0AКонтакт: ${encodeURIComponent(contact)}`;
 
       if (telegramUsername === 'YOUR_TELEGRAM_USERNAME') {
-        alert('Заявка сформирована. В коде замените YOUR_TELEGRAM_USERNAME на ваш Telegram, чтобы кнопка отправляла заявки.');
+        alert('Заявка сформирована. Замените YOUR_TELEGRAM_USERNAME в коде на ваш Telegram username без @.');
         return;
       }
 
       window.open(`https://t.me/${telegramUsername}?text=${message}`, '_blank');
     }
-  </script>
-</body>
-</html>
+  </sc
