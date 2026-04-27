@@ -333,41 +333,6 @@
       50% { transform: scale(1.04); opacity: .84; }
     }
 
-    .ai-face {
-      position: relative;
-      width: min(282px, 60vw);
-      aspect-ratio: 1;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 1px solid rgba(255,223,165,.28);
-      background:
-        radial-gradient(circle at 50% 38%, rgba(255,248,225,.92), rgba(230,184,111,.36) 30%, rgba(91,24,36,.20) 58%, rgba(255,255,255,.03) 76%),
-        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-      box-shadow: 0 0 92px rgba(230,184,111,.15), inset 0 0 60px rgba(255,255,255,.10);
-    }
-    .ai-face::before {
-      content: "";
-      position: absolute;
-      inset: 16%;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,.15);
-      background:
-        linear-gradient(90deg, transparent 49%, rgba(255,255,255,.10) 50%, transparent 51%),
-        linear-gradient(0deg, transparent 49%, rgba(255,255,255,.08) 50%, transparent 51%);
-      opacity: .8;
-    }
-    .ai-face::after {
-      content: "AI VIDEO AVATAR";
-      position: absolute;
-      left: 50%;
-      bottom: 36px;
-      transform: translateX(-50%);
-      font-size: 10px;
-      letter-spacing: .16em;
-      color: rgba(255,255,255,.55);
-      white-space: nowrap;
-    }
-
     .ai-avatar-live {
       position: relative;
       width: min(292px, 62vw);
@@ -391,15 +356,62 @@
       50% { transform: translateY(-5px) scale(1.01); }
     }
 
-    .ai-avatar-live video {
+    .avatar-video {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      filter: saturate(.88) contrast(1.05) brightness(.88);
-      transform: scale(1.05);
+      filter: saturate(.92) contrast(1.08) brightness(.90);
+      transform: scale(1.06);
+      z-index: 1;
+      opacity: 1;
+    }
+
+    .avatar-fallback {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: none;
+      place-items: center;
+      text-align: center;
+      padding: 28px;
+      background:
+        radial-gradient(circle at 50% 32%, rgba(255,245,220,.86), rgba(230,184,111,.22) 24%, rgba(91,24,36,.28) 58%, rgba(20,10,15,.24) 76%),
+        #0C070B;
+      color: var(--text);
+    }
+
+    .avatar-fallback.visible {
+      display: grid;
+    }
+
+    .fallback-face {
+      width: 84px;
+      height: 84px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 14px;
+      color: #261307;
+      background: linear-gradient(135deg, #FFF0C8, #E6B86F 52%, #8C4B2D);
+      font-size: 32px;
+      font-weight: 950;
+    }
+
+    .avatar-fallback strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--gold2);
+    }
+
+    .avatar-fallback span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
     }
 
     .ai-avatar-live::after {
@@ -1059,7 +1071,7 @@
     }
     .price-card h3 { margin: 0 0 10px; font-size: 25px; letter-spacing: -.04em; }
     .price-card p { color: var(--muted); line-height: 1.55; margin: 0; }
-    .price { margin: 20px 0 18px; font-size: 38px; font-weight: 950; letter-spacing: -.055em; }
+    .price { margin: 20px 0 18px; font-size: clamp(26px, 2.4vw, 38px); font-weight: 950; letter-spacing: -.055em; line-height: 1.05; }
     .features { padding: 0; margin: 22px 0 0; list-style: none; display: grid; gap: 12px; color: var(--muted); }
     .features li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; line-height: 1.45; }
     .features li::before { content: "✓"; color: var(--gold2); font-weight: 950; }
@@ -1273,9 +1285,16 @@
               <div class="ring two"></div>
               <div class="ring three"></div>
               <div class="ai-avatar-live speaking">
-                <video autoplay muted loop playsinline preload="auto">
+                <video class="avatar-video" id="mamaAvatarVideo" autoplay muted loop playsinline preload="auto">
                   <source src="mama-avatar-loop.mp4" type="video/mp4" />
                 </video>
+
+                <div class="avatar-fallback" id="avatarFallback">
+                  <div class="fallback-face">М</div>
+                  <strong>mama-avatar-loop.mp4</strong>
+                  <span>загрузите видео рядом с index.html</span>
+                </div>
+
                 <div class="avatar-glow"></div>
                 <div class="avatar-shimmer"></div>
                 <div class="avatar-badge">AI VIDEO AVATAR</div>
@@ -1729,6 +1748,25 @@
       }
 
       window.open(`https://t.me/${telegramUsername}?text=${message}`, '_blank');
+    }
+
+    const mamaAvatarVideo = document.getElementById('mamaAvatarVideo');
+    const avatarFallback = document.getElementById('avatarFallback');
+
+    if (mamaAvatarVideo && avatarFallback) {
+      mamaAvatarVideo.addEventListener('loadeddata', () => {
+        avatarFallback.classList.remove('visible');
+      });
+
+      mamaAvatarVideo.addEventListener('error', () => {
+        avatarFallback.classList.add('visible');
+      });
+
+      setTimeout(() => {
+        if (mamaAvatarVideo.readyState < 2) {
+          avatarFallback.classList.add('visible');
+        }
+      }, 1800);
     }
 
     const bgMusic = document.getElementById('bgMusic');
