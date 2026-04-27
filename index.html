@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LastCall AI — позвоните тем, чей голос хочется услышать снова</title>
-  <meta name="description" content="LastCall AI — видеозвонок с AI-аватаром покойного родственника на основе фото, видео, голоса, писем и семейных воспоминаний." />
+  <title>LastCall AI — когда хочется услышать голос близкого еще раз</title>
+  <meta name="description" content="LastCall AI — бережный AI-видеозвонок с цифровой памятью покойного родственника на основе фото, видео, голоса, писем и семейных воспоминаний." />
 
   <meta property="og:title" content="LastCall AI — звонок покойному родственнику через AI-видеоаватар" />
   <meta property="og:description" content="Загрузите семейные фото, видео, голосовые записи и письма. ИИ создаст бережный видеоаватар для разговора с памятью близкого человека." />
@@ -701,6 +701,81 @@
       font-size: 14px;
     }
 
+    .storyline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .story-card {
+      min-height: 265px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 24% 0%, rgba(227,188,114,.13), transparent 34%),
+        rgba(255,255,255,.045);
+      padding: 23px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-card::after {
+      content: "";
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(227,188,114,.65), transparent);
+      opacity: .55;
+    }
+
+    .story-num {
+      color: var(--gold2);
+      font-weight: 900;
+      letter-spacing: .08em;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+
+    .story-card h3 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -.04em;
+      line-height: 1.13;
+    }
+
+    .story-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: 15px;
+    }
+
+    .emotional-line {
+      border-radius: 34px;
+      border: 1px solid rgba(227,188,114,.24);
+      background:
+        radial-gradient(circle at 20% 16%, rgba(227,188,114,.18), transparent 36%),
+        radial-gradient(circle at 78% 74%, rgba(165,144,255,.13), transparent 34%),
+        rgba(255,255,255,.05);
+      padding: clamp(28px, 5vw, 54px);
+      margin-top: 16px;
+    }
+
+    .emotional-line p {
+      max-width: 890px;
+      margin: 0;
+      font-size: clamp(24px, 3.2vw, 42px);
+      line-height: 1.12;
+      letter-spacing: -.055em;
+    }
+
+    .emotional-line span {
+      color: var(--gold2);
+    }
+
     .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .price-card {
       border-radius: 31px;
@@ -800,7 +875,7 @@
       .hero-grid, .section-head, .split, .demo-grid, .media-grid, .founder-card { grid-template-columns: 1fr; }
       .founder-photo { border-right: 0; border-bottom: 1px solid var(--line); min-height: 460px; }
       .hero-visual { min-height: 640px; }
-      .cards-3, .trust-row, .pricing, .limits, .founder-points { grid-template-columns: repeat(2, 1fr); }
+      .cards-3, .trust-row, .pricing, .limits, .founder-points, .storyline { grid-template-columns: repeat(2, 1fr); }
       .demo-left { border-right: 0; border-bottom: 1px solid var(--line); }
       .form { grid-template-columns: 1fr; }
       .price-card.featured { transform: none; }
@@ -818,7 +893,7 @@
       .video-face { height: 365px; }
       .source-float { left: 16px; right: 16px; width: auto; bottom: 112px; }
       .caption { left: 14px; right: 14px; }
-      .cards-3, .trust-row, .pricing, .limits, .founder-points { grid-template-columns: 1fr; }
+      .cards-3, .trust-row, .pricing, .limits, .founder-points, .storyline { grid-template-columns: 1fr; }
       .founder-photo { min-height: 380px; }
       .panel { padding: 22px; border-radius: 28px; }
       .cta-box { border-radius: 31px; }
@@ -851,17 +926,17 @@
     <header class="hero" id="top">
       <div class="container hero-grid">
         <div>
-          <div class="badge"><span class="pulse"></span> AI-видеозвонок с теми, чей голос хочется услышать снова</div>
-          <h1>Позвоните покойному родственнику через <span class="soft-gradient">AI-видеоаватар</span></h1>
+          <div class="badge"><span class="pulse"></span> AI-видеозвонок с цифровой памятью близкого человека</div>
+          <h1>Когда хочется услышать мамин голос <span class="soft-gradient">еще один раз</span></h1>
           <p class="lead">
-            LastCall AI создает бережный видеоаватар близкого человека на основе фото, видео, голоса, писем и семейных воспоминаний — чтобы семья могла задать вопрос, услышать голос и увидеть лицо снова.
+            После утраты в телефоне остаются фотографии, старые видео, короткие голосовые и сообщения. Но самый важный разговор часто так и не случился. LastCall AI помогает создать бережный AI-видеозвонок с покойным родственником — на основе настоящих семейных материалов, голоса, писем и воспоминаний.
           </p>
           <div class="actions">
             <a class="btn btn-primary" href="#contact">Создать первый звонок</a>
-            <a class="btn btn-secondary" href="#demo">Посмотреть сценарий</a>
+            <a class="btn btn-secondary" href="#story">Прочитать историю</a>
           </div>
           <p class="note">
-            Сервис всегда сообщает, что это ИИ-аватар. Ответы строятся на загруженных материалах, а семья управляет доступом, временем звонков и режимами общения.
+            Это не обещание вернуть человека. Это технология, которая бережно собирает то, что осталось: голос, лицо, слова, письма и семейные истории — чтобы память могла ответить.
           </p>
 
           <div class="trust-row">
@@ -879,10 +954,10 @@
                 <div class="avatar-dot">М</div>
                 <div>
                   <strong>Мама · AI-видеоаватар</strong>
-                  <span>создано на основе семейного архива</span>
+                  <span>ответы только из семейного архива</span>
                 </div>
               </div>
-              <div class="call-status">звонок идет · 03:18</div>
+              <div class="call-status">первый звонок · 03:18</div>
             </div>
             <div class="video-face">
               <div class="rings"></div>
@@ -890,12 +965,12 @@
               <div class="face"></div>
               <div class="caption">
                 <div class="q">Вы спросили:</div>
-                <div class="a">«Что бы ты сказала мне, когда мне страшно начинать новую жизнь?»</div>
+                <div class="a">«Мам, мне страшно. Что бы ты сказала сейчас?»</div>
               </div>
             </div>
             <div class="source-float">
-              <small>Ответ основан на источниках</small>
-              <p>Видео 2018 года, письмо дочери и 4 голосовые записи из семейного архива.</p>
+              <small>Память с источниками</small>
+              <p>Ответ собран из видео 2018 года, письма дочери и голосовых сообщений из семейного архива.</p>
             </div>
             <div class="call-controls">
               <div class="control">🎙</div>
@@ -908,12 +983,53 @@
       </div>
     </header>
 
+    <section id="story">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Драматургия продукта</div>
+            <h2>Самое больное — не смерть. Самое больное — тишина после нее.</h2>
+          </div>
+          <p class="copy">
+            У каждого в телефоне есть человек, которому уже нельзя позвонить. Переписка осталась. Фотографии остались. Видео остались. Но нет одного: возможности спросить, услышать знакомую интонацию и почувствовать, что семейная память не оборвалась.
+          </p>
+        </div>
+
+        <div class="storyline">
+          <div class="story-card">
+            <div class="story-num">АКТ 01</div>
+            <h3>Телефон, который больше не звонит</h3>
+            <p>После потери человек часто возвращается к старым сообщениям, фото и голосовым. Не чтобы жить прошлым, а чтобы на секунду снова почувствовать связь.</p>
+          </div>
+          <div class="story-card">
+            <div class="story-num">АКТ 02</div>
+            <h3>Вопрос, который остался внутри</h3>
+            <p>«Мам, что мне делать?», «Дедушка, ты бы мной гордился?», «Что ты хотел мне сказать?» — такие вопросы не исчезают. Они просто остаются без адресата.</p>
+          </div>
+          <div class="story-card">
+            <div class="story-num">АКТ 03</div>
+            <h3>Архив начинает отвечать</h3>
+            <p>ИИ собирает фрагменты реального человека: голос, видео, письма, слова, привычные фразы и истории — и превращает их в бережный видеозвонок.</p>
+          </div>
+          <div class="story-card">
+            <div class="story-num">АКТ 04</div>
+            <h3>Разговор не возвращает прошлое. Он помогает его удержать</h3>
+            <p>Звонок не заменяет человека. Он дает семье новый способ сохранить связь с памятью — честно, прозрачно и с уважением.</p>
+          </div>
+        </div>
+
+        <div class="emotional-line">
+          <p>LastCall AI — это не «оживление умерших». Это <span>последний разговор, который можно собрать из настоящей любви, голоса и памяти</span>.</p>
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="container">
         <div class="section-head">
           <div>
             <div class="kicker">Идея</div>
-            <h2>Не просто архив. Возможность снова поговорить.</h2>
+            <h2>Не просто архив. Момент, когда память отвечает.</h2>
           </div>
           <p class="copy">
             Обычно после потери остаются фотографии, видео и переписки. Но они молчат. LastCall AI превращает семейный архив в интерактивный видеозвонок: человек задает вопрос, а AI-аватар отвечает голосом и образом родственника — только в рамках сохраненных воспоминаний.
@@ -1047,10 +1163,10 @@
         <div class="section-head">
           <div>
             <div class="kicker">Видео-атмосфера</div>
-            <h2>Покажите не технологию. Покажите момент звонка.</h2>
+            <h2>Видео должно начинаться не с интерфейса. А с паузы перед звонком.</h2>
           </div>
           <p class="copy">
-            В лендинг добавлены места под видео, которые эмоционально объясняют продукт: звонок дедушке, разговор молодого человека с AI-аватаром близкого и семейная реакция на голос из архива. Видео должны быть сняты бережно, без давления на зрителя и без ощущения эксплуатации горя.
+            Сильнее всего работает не демонстрация технологии, а человеческий момент: сын долго смотрит на экран, нажимает «позвонить», слышит знакомую интонацию и впервые за долгое время не читает старое сообщение, а говорит вслух.
           </p>
         </div>
 
@@ -1062,8 +1178,8 @@
               </video>
             </div>
             <div class="video-info">
-              <h3>«Дедушка, я хотел снова услышать твой голос»</h3>
-              <p>Главное видео лендинга: спокойный, кинематографичный момент звонка с AI-видеоаватаром дедушки. Акцент — не на смерти, а на сохраненной любви, голосе и семейной памяти.</p>
+              <h3>«Дедушка, я так и не успел спросить…»</h3>
+              <p>Главное видео лендинга: рука над кнопкой звонка, старое фото рядом с ноутбуком, тишина, вдох — и знакомый голос, который возвращается не как чудо, а как сохраненная семейная память.</p>
             </div>
           </div>
 
@@ -1075,8 +1191,8 @@
                 </video>
               </div>
               <div class="video-info">
-                <h3>Первый разговор после потери</h3>
-                <p>Сцена, где молодой человек слышит знакомый голос, задает вопрос и видит источники ответа из семейного архива.</p>
+                <h3>Сын звонит маме</h3>
+                <p>Он не ищет магию. Он хочет услышать одну фразу, которой не хватило в самый трудный момент: «Я с тобой в твоей памяти. Ты справишься».</p>
               </div>
             </div>
 
@@ -1087,8 +1203,8 @@
                 </video>
               </div>
               <div class="video-info">
-                <h3>Когда архив отвечает голосом семьи</h3>
-                <p>Короткое видео с реакцией близких: слезы, пауза, тишина и осознание, что голос и истории можно сохранить.</p>
+                <h3>Семья слышит голос снова</h3>
+                <p>Не громкая драма, а тихая реакция: люди узнают интонацию, смотрят друг на друга и понимают, что теперь семейная история не исчезнет в старом телефоне.</p>
               </div>
             </div>
           </div>
@@ -1127,10 +1243,10 @@
         <div class="section-head">
           <div>
             <div class="kicker">Ограничители</div>
-            <h2>Чтобы звонок помогал, а не затягивал в боль</h2>
+            <h2>Сильная эмоция требует сильных границ</h2>
           </div>
           <p class="copy">
-            Для такого продукта безопасность — часть дизайна. Нужны лимиты, прозрачность, семейный контроль и уважение к памяти человека.
+            Чем сильнее продукт касается любви и утраты, тем честнее должны быть правила. LastCall AI не должен притворяться живым человеком, удерживать в прошлом или подменять поддержку семьи. Его задача — бережно хранить память и показывать источник каждого ответа.
           </p>
         </div>
 
@@ -1168,10 +1284,10 @@
         <div class="section-head">
           <div>
             <div class="kicker">Тарифы</div>
-            <h2>Форматы запуска</h2>
+            <h2>Первый продукт должен быть почти как церемония</h2>
           </div>
           <p class="copy">
-            Для MVP лучше начать с ручного премиального сервиса: собрать материалы, сделать цифровой архив, подготовить ограниченный звонок и проверить эмоциональную реакцию семей.
+            Не продавайте это как обычную подписку. Первый опыт должен ощущаться как бережно подготовленный семейный момент: сбор материалов, настройка голоса, сценарий вопросов, первый звонок и возможность остановиться в любой момент.
           </p>
         </div>
 
@@ -1262,14 +1378,14 @@
       <div class="container">
         <div class="cta-box">
           <div class="kicker">Ранний доступ</div>
-          <h2>Создайте первый AI-звонок с близким человеком</h2>
+          <h2>Есть голос, который вы хотели бы услышать еще раз?</h2>
           <p>
-            Оставьте заявку. Мы свяжемся, объясним, какие фото, видео и голосовые записи нужны, и поможем собрать первый безопасный сценарий звонка.
+            Оставьте заявку. Мы бережно объясним, какие фото, видео, письма и голосовые записи нужны, и поможем собрать первый сценарий AI-звонка — без мистики, без обмана, только из настоящей семейной памяти.
           </p>
           <form class="form" onsubmit="sendForm(event)">
             <input class="input" id="name" type="text" placeholder="Ваше имя" required />
             <input class="input" id="contactField" type="text" placeholder="Телефон или Telegram" required />
-            <button class="btn btn-primary" type="submit">Хочу ранний доступ</button>
+            <button class="btn btn-primary" type="submit">Хочу создать звонок</button>
           </form>
           <p class="note" style="margin:16px auto 0; text-align:center;">
             В коде замените YOUR_TELEGRAM_USERNAME на ваш Telegram username без @.
@@ -1280,7 +1396,7 @@
 
     <footer class="footer">
       <div class="container footer-inner">
-        <div>© 2026 LastCall AI. AI-видеозвонки с цифровой памятью близких.</div>
+        <div>© 2026 LastCall AI. Когда семейная память может ответить голосом.</div>
         <div class="footer-links">
           <a href="#how">Как работает</a>
           <a href="#safety">Безопасность</a>
