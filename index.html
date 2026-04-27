@@ -580,6 +580,143 @@
     .limit h3 { margin: 0 0 9px; font-size: 20px; letter-spacing: -.03em; }
     .limit p { margin: 0; color: var(--muted); line-height: 1.58; }
 
+    .media-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .video-card {
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      overflow: hidden;
+      box-shadow: 0 20px 70px rgba(0,0,0,.22);
+    }
+
+    .video-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(227,188,114,.22), transparent 34%),
+        radial-gradient(circle at 76% 60%, rgba(165,144,255,.14), transparent 35%),
+        #0B0D13;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 30px;
+      color: var(--muted);
+    }
+
+    .play-mark {
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      background: rgba(227,188,114,.12);
+      border: 1px solid rgba(227,188,114,.30);
+      color: var(--gold2);
+      font-size: 26px;
+    }
+
+    .video-info { padding: 22px; }
+    .video-info h3 { margin: 0 0 10px; font-size: 22px; letter-spacing: -.035em; }
+    .video-info p { margin: 0; color: var(--muted); line-height: 1.58; }
+
+    .video-stack { display: grid; gap: 16px; }
+    .video-stack .video-card .video-info { padding: 18px; }
+    .video-stack .video-info h3 { font-size: 19px; }
+
+    .founder-card {
+      display: grid;
+      grid-template-columns: .82fr 1.18fr;
+      gap: 0;
+      overflow: hidden;
+      border-radius: var(--r-xl);
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 18% 20%, rgba(227,188,114,.16), transparent 33%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      box-shadow: var(--shadow);
+    }
+
+    .founder-photo {
+      min-height: 520px;
+      position: relative;
+      background:
+        radial-gradient(circle at 45% 30%, rgba(227,188,114,.24), transparent 34%),
+        #0B0D13;
+      border-right: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .founder-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.95) contrast(1.02);
+    }
+
+    .founder-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.45));
+      pointer-events: none;
+    }
+
+    .founder-content { padding: clamp(28px, 5vw, 54px); }
+    .founder-content h2 { margin-bottom: 18px; }
+    .founder-content p { color: var(--muted); line-height: 1.68; font-size: 17px; }
+
+    .founder-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: var(--gold2);
+      border: 1px solid rgba(227,188,114,.26);
+      background: rgba(227,188,114,.08);
+      margin-bottom: 18px;
+      font-size: 14px;
+      font-weight: 780;
+    }
+
+    .founder-points {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .founder-point {
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.11);
+      background: rgba(255,255,255,.045);
+      padding: 16px;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 14px;
+    }
+
     .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .price-card {
       border-radius: 31px;
@@ -676,9 +813,10 @@
     .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
 
     @media (max-width: 980px) {
-      .hero-grid, .section-head, .split, .demo-grid { grid-template-columns: 1fr; }
+      .hero-grid, .section-head, .split, .demo-grid, .media-grid, .founder-card { grid-template-columns: 1fr; }
+      .founder-photo { border-right: 0; border-bottom: 1px solid var(--line); min-height: 460px; }
       .hero-visual { min-height: 640px; }
-      .cards-3, .trust-row, .pricing, .limits { grid-template-columns: repeat(2, 1fr); }
+      .cards-3, .trust-row, .pricing, .limits, .founder-points { grid-template-columns: repeat(2, 1fr); }
       .demo-left { border-right: 0; border-bottom: 1px solid var(--line); }
       .form { grid-template-columns: 1fr; }
       .price-card.featured { transform: none; }
@@ -696,7 +834,8 @@
       .video-face { height: 365px; }
       .source-float { left: 16px; right: 16px; width: auto; bottom: 112px; }
       .caption { left: 14px; right: 14px; }
-      .cards-3, .trust-row, .pricing, .limits { grid-template-columns: 1fr; }
+      .cards-3, .trust-row, .pricing, .limits, .founder-points { grid-template-columns: 1fr; }
+      .founder-photo { min-height: 380px; }
       .panel { padding: 22px; border-radius: 28px; }
       .cta-box { border-radius: 31px; }
       .call-status { display: none; }
@@ -716,6 +855,8 @@
         <div class="nav-links">
           <a href="#how">Как работает</a>
           <a href="#demo">Демо звонка</a>
+          <a href="#media">Видео</a>
+          <a href="#founder">Основатель</a>
           <a href="#safety">Безопасность</a>
           <a href="#pricing">Тарифы</a>
           <a class="nav-cta" href="#contact">Ранний доступ</a>
@@ -917,6 +1058,107 @@
       </div>
     </section>
 
+    <section id="media">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Видео-атмосфера</div>
+            <h2>Покажите не технологию. Покажите момент звонка.</h2>
+          </div>
+          <p class="copy">
+            В лендинг добавлены места под видео, которые эмоционально объясняют продукт: звонок дедушке, разговор молодого человека с AI-аватаром близкого и семейная реакция на голос из архива. Видео должны быть сняты бережно, без давления на зрителя и без ощущения эксплуатации горя.
+          </p>
+        </div>
+
+        <div class="media-grid">
+          <div class="video-card">
+            <div class="video-wrap">
+              <video controls poster="video-grandfather-call-poster.jpg">
+                <source src="video-grandfather-call.mp4" type="video/mp4" />
+              </video>
+              <div class="video-placeholder">
+                <div>
+                  <div class="play-mark">▶</div>
+                  <strong>video-grandfather-call.mp4</strong><br />
+                  Загрузите в репозиторий видео про звонок покойному дедушке
+                </div>
+              </div>
+            </div>
+            <div class="video-info">
+              <h3>«Дедушка, я хотел снова услышать твой голос»</h3>
+              <p>Главное видео лендинга: спокойный, кинематографичный момент звонка с AI-видеоаватаром дедушки. Акцент — не на смерти, а на сохраненной любви, голосе и семейной памяти.</p>
+            </div>
+          </div>
+
+          <div class="video-stack">
+            <div class="video-card">
+              <div class="video-wrap">
+                <video controls poster="video-young-person-call-poster.jpg">
+                  <source src="video-young-person-call.mp4" type="video/mp4" />
+                </video>
+                <div class="video-placeholder">
+                  <div>
+                    <div class="play-mark">▶</div>
+                    <strong>video-young-person-call.mp4</strong><br />
+                    Видео, где молодой человек разговаривает с AI-аватаром близкого
+                  </div>
+                </div>
+              </div>
+              <div class="video-info">
+                <h3>Первый разговор после потери</h3>
+                <p>Сцена, где молодой человек слышит знакомый голос, задает вопрос и видит источники ответа из семейного архива.</p>
+              </div>
+            </div>
+
+            <div class="video-card">
+              <div class="video-wrap">
+                <video controls poster="video-family-reaction-poster.jpg">
+                  <source src="video-family-reaction.mp4" type="video/mp4" />
+                </video>
+                <div class="video-placeholder">
+                  <div>
+                    <div class="play-mark">▶</div>
+                    <strong>video-family-reaction.mp4</strong><br />
+                    Видео с эмоциональной семейной реакцией на звонок
+                  </div>
+                </div>
+              </div>
+              <div class="video-info">
+                <h3>Когда архив отвечает голосом семьи</h3>
+                <p>Короткое видео с реакцией близких: слезы, пауза, тишина и осознание, что голос и истории можно сохранить.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="founder">
+      <div class="container">
+        <div class="founder-card">
+          <div class="founder-photo">
+            <img src="liana-mirzabalaeva.jpg" alt="Лиана Мирзабалаева — основатель проекта LastCall AI" />
+          </div>
+          <div class="founder-content">
+            <div class="founder-name">Основатель проекта · Лиана Мирзабалаева</div>
+            <h2>Проект о том, что память должна быть живой, но честной</h2>
+            <p>
+              LastCall AI создан как сервис для семей, которые хотят сохранить голос, лицо, истории и личные смыслы близкого человека. Не как мистификация и не как обещание вернуть ушедшего, а как новый формат цифрового наследия: видеозвонок с памятью, собранной из реальных фото, видео, писем и голоса.
+            </p>
+            <p>
+              Миссия проекта — дать семьям технологию бережного разговора: с прозрачным статусом AI-аватара, источниками каждого ответа, семейным контролем доступа и правом отключить аватар в любой момент.
+            </p>
+            <div class="founder-points">
+              <div class="founder-point">Фокус на этичном AI и семейной памяти</div>
+              <div class="founder-point">Видеоаватар только с прозрачной маркировкой ИИ</div>
+              <div class="founder-point">Ответы на основе архива, без выдуманных воспоминаний</div>
+              <div class="founder-point">Премиальный сервис для семейного цифрового наследия</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="safety">
       <div class="container">
         <div class="section-head">
@@ -1100,4 +1342,6 @@
 
       window.open(`https://t.me/${telegramUsername}?text=${message}`, '_blank');
     }
-  </sc
+  </script>
+</body>
+</html>
